@@ -38,13 +38,9 @@ Here is an example implementation:
 #### Post transaction with IBX SDK
 ```javascript
 "use strict";
-const ibx = require('payroc-ibx');
+const ibx = require('payroc_ibx');
 const util = require('util');
 const xml2js = require('xml2js').Parser({explicitArray:false});
-
-// Store these somewhere safe.
-const api_username = 'test_username';
-const api_password = 'test_password';
 
 // You can use your own JSON Model, or use the included models.
 const cardData = new ibx.cardDataModel();
@@ -74,6 +70,12 @@ let myPaymentCallback = function (response) {
 
 // If you want to post a card transaction
 let myCallback = function (response) {
+
+    if (response.error) {
+        console.log(util.inspect(response.error, false, null, true))
+        return;
+    }
+
     // Do something with response here
     console.log(util.inspect(response, false, null, true))
 
@@ -84,10 +86,13 @@ let myCallback = function (response) {
     payload.transaction_type = 'sale';
     payload.ext_data = '';
 
-    ibx.processCard(payload, api_username, api_password, myPaymentCallback);
+    ibx.processCard(payload, myPaymentCallback);
 };
 
-ibx.storeCard(payload, api_username, api_password, myCallback); // That's it!
+ibx.setAuth(process.env.TEST_USERNAME, process.env.TEST_PASSWORD);
+ibx.setEnv(ibx.environments.SANDBOX);
+ibx.storeCard(payload, myCallback); // That's it!
+
 
 ```
 
