@@ -101,30 +101,34 @@ ibx.storeCard(payload, myCallback); // That's it!
 #### Example Response
 Example successful `processCard` using the example above will return the following JSON object as a response:
 ```json
-{ '$': 
-   { 'xmlns:xsd': 'http://www.w3.org/2001/XMLSchema',
-     'xmlns:xsi': 'http://www.w3.org/2001/XMLSchema-instance',
-     xmlns: 'https://gw-v1.ibxpays.com/ws' },
-  Result: '0',
-  RespMSG: 'Approved',
-  Message: 'Approval - Approved and completed',
-  Message1: '',
-  Message2: '',
-  AuthCode: 'TAS105',
-  PNRef: '104296',
-  HostCode: '000000000000147',
-  HostURL: '',
-  GetAVSResult: 'N',
-  GetAVSResultTXT: 'No Match',
-  GetStreetMatchTXT: 'No Match',
-  GetZipMatchTXT: 'No Match',
-  GetGetOrigResult: '',
-  GetCommercialCard: 'False',
-  ExtData: 
-   { CardType: 'VISA',
-     LastFour: '4242',
-     ExpDate: '1220',
-     BatchNum: '128' } }
+{
+    "$": {
+    "xmlns:xsd": "http://www.w3.org/2001/XMLSchema",
+     "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+     "xmlns": "https://gw-v1.ibxpays.com/ws"
+    },
+    "Result": "0",
+    "RespMSG": "Approved",
+    "Message": "Approval - Approved and completed",
+    "Message1": "",
+    "Message2": "",
+    "AuthCode": "TAS105",
+    "PNRef": "104296",
+    "HostCode": "000000000000147",
+    "HostURL": "",
+    "GetAVSResult": "N",
+    "GetAVSResultTXT": "No Match",
+    "GetStreetMatchTXT": "No Match",
+    "GetZipMatchTXT": "No Match",
+    "GetGetOrigResult": "",
+    "GetCommercialCard": "False",
+    "ExtData": {
+        "CardType": "VISA",
+        "LastFour": "4242",
+        "ExpDate": "1220",
+        "BatchNum": "128"
+    }
+}
 
 ```
 
