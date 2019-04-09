@@ -135,6 +135,7 @@ Example successful `processCard` using the example above will return the followi
 Check out the files in `/examples` for other ideas for implementation.
 
 ## Testing
+[![Try Payroc IBX SDK on RunKit](https://badge.runkitcdn.com/payroc_ibx.svg)](https://npm.runkit.com/payroc_ibx)
 
 Unit tests on this project are run using Mocha. You can find each test in the `/test` folder.
 

@@ -1,17 +1,8 @@
 {
   "name": "payroc_ibx",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "description": "This is an SDK for transaction processing with IBX gateway",
   "main": "ibx-core.js",
-  "scripts": {
-    "test": "node node_modules/nyc/bin/nyc node_modules/mocha/bin/mocha 'test/**/*.js'",
-    "test-report": "node node_modules/nyc/bin/nyc report",
-    "test-check-coverage": "node node_modules/nyc/bin/nyc check-coverage --lines 95 --functions 95 --branches 95"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/payroc/ibx-node.git"
-  },
   "keywords": [
     "ibx",
     "payroc",
@@ -27,13 +18,22 @@
     "tokenzation",
     "omnichannel"
   ],
+  "homepage": "https://github.com/payroc/ibx-node#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/payroc/ibx-node.git"
+  },
   "author": "IBX Developemnet <support@ibxpays.com> (http://www.payroc.com)",
   "license": "MIT",
-  "runkitExampleFilename": "examples/simple.js",
+  "runkitExample" : "var ibx = require('payroc_ibx');",
   "bugs": {
     "url": "https://github.com/payroc/ibx-node/issues"
   },
-  "homepage": "https://github.com/payroc/ibx-node#readme",
+  "scripts": {
+    "test": "node node_modules/nyc/bin/nyc node_modules/mocha/bin/mocha 'test/**/*.js'",
+    "test-report": "node node_modules/nyc/bin/nyc report",
+    "test-check-coverage": "node node_modules/nyc/bin/nyc check-coverage --lines 95 --functions 95 --branches 95"
+  },
   "devDependencies": {
     "chai": "^4.2.0",
     "istanbul": "^0.4.5",
