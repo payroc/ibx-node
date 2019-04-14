@@ -19,7 +19,7 @@ Run the following command at the root fo your project
 npm install ibx-node
 ```
 
-[IBX SDK on NPM](https://www.npmjs.com/package/ibx-node)
+[IBX SDK on NPM](https://www.npmjs.com/package/payroc_ibx)
 
 
 ### Manual Install
@@ -63,9 +63,16 @@ payload.card = cardData;
 payload.address = addressData;
 
 
+let myReportingCallback = function (response) {
+    // Do something with response here
+    console.log(util.inspect(response, false, null, true))
+}
+
 let myPaymentCallback = function (response) {
     // Do something with response here
     console.log(util.inspect(response, false, null, true))
+    payload = new ibx.batchPayloadModel();
+    ibx.openBatchSummary(payload, myReportingCallback);
 }
 
 // If you want to post a card transaction
@@ -92,7 +99,6 @@ let myCallback = function (response) {
 ibx.setAuth(process.env.TEST_USERNAME, process.env.TEST_PASSWORD);
 ibx.setEnv(ibx.environments.SANDBOX);
 ibx.storeCard(payload, myCallback); // That's it!
-
 
 ```
 

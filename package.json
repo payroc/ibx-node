@@ -1,6 +1,6 @@
 {
   "name": "payroc_ibx",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "description": "This is an SDK for transaction processing with IBX gateway",
   "main": "ibx-core.js",
   "keywords": [
@@ -21,7 +21,7 @@
   "homepage": "https://github.com/payroc/ibx-node#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/payroc/ibx-node.git"
+    "url": "https://github.com/payroc/ibx-node.git"
   },
   "author": "IBX Developemnet <support@ibxpays.com> (http://www.payroc.com)",
   "license": "MIT",

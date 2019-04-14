@@ -15,6 +15,9 @@ const token_get_endpoint = '${token_post_endpoint}/';
 const transactions_post_endpoint = '/ws/cardsafe.asmx/ProcessCreditCard';
 const transactions_get_endpoint = '${transactions_post_endpoint}';
 
+const card_batch_summary_post_endpoint = '/vt/ws/trxdetail.asmx/GetOpenBatchSummary';
+const card_batch_summary_get_endpoint = '${card_batch_summary_post_endpoint}';
+
 // Params
 let _api_username;
 let _api_password;
@@ -26,6 +29,7 @@ exports.addressDataModel = require('./models/address-data');
 exports.metaDataModel = require('./models/meta-data');
 exports.storeCardPayloadModel = require('./models/storecard-payload');
 exports.processCardPayloadModel = require('./models/processcard-payload');
+exports.batchPayloadModel = require('./models/batch-payload');
 
 function parseSync (xml) {
     let error = null;
@@ -165,6 +169,54 @@ exports.processCard = function (payload, callback) {
             response = response.Response;
             response.ExtData = parseExtData(response.ExtData);
             callback(response);
+        }
+    });
+};
+
+exports.openBatchSummary = function (payload, callback) {
+
+    if (! _api_username || ! _api_password) {
+        errorObj.error.message = 'Invalid Credentials';
+        callback(errorObj);
+        return;
+    }
+
+    let today = new Date();
+    let fromDate = (today.getMonth()+1) + '/' + today.getDate() + '/' + today.getFullYear().toString().substring(2,4); 
+    let toDate = (today.getMonth()+1) + '/' + (today.getDate()+1) + '/' + today.getFullYear().toString().substring(2,4);
+
+    fromDate = (payload.beginDt) ? payload.beginDt : fromDate;
+    toDate = (payload.endDt) ? payload.endDt : toDate;
+
+    request({
+        method: 'POST',
+        uri: 'https://' + base_endpoint + card_batch_summary_post_endpoint,
+        headers: {
+            'User-Agent': 'Node.js ${process.version}'
+        },
+        form: {
+            username: _api_username,
+            password: _api_password,
+            rpNum: payload.gatewayId,
+            beginDt: fromDate,
+            endDt: toDate,
+            extData: payload.extData
+        }
+    }, function (error, response, body) {
+        if (error) {
+            errorObj.error.message = 'Connection Error';
+            errorObj.error.obj = error;
+            errorObj.error.code = 500;
+            callback(errorObj);
+        }
+        else {
+            response = parseSync(body);
+            response = parseSync(response.string._);
+            if (response.OpenBatchSummary.Table) {
+                response.OpenBatchSummary.PaymentTypes = response.OpenBatchSummary.Table;
+                delete response.OpenBatchSummary.Table;
+            }
+            callback(response.OpenBatchSummary);
         }
     });
 };

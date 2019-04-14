@@ -24,9 +24,16 @@ payload.card = cardData;
 payload.address = addressData;
 
 
+let myReportingCallback = function (response) {
+    // Do something with response here
+    console.log(util.inspect(response, false, null, true))
+}
+
 let myPaymentCallback = function (response) {
     // Do something with response here
     console.log(util.inspect(response, false, null, true))
+    payload = new ibx.batchPayloadModel();
+    ibx.openBatchSummary(payload, myReportingCallback);
 }
 
 // If you want to post a card transaction
