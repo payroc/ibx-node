@@ -21,7 +21,7 @@
   "homepage": "https://github.com/payroc/ibx-node#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/payroc/ibx-node.git"
+    "url": "https://github.com/payroc/ibx-node.git"
   },
   "author": "IBX Developemnet <support@ibxpays.com> (http://www.payroc.com)",
   "license": "MIT",

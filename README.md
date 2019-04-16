@@ -63,9 +63,16 @@ payload.card = cardData;
 payload.address = addressData;
 
 
+let myReportingCallback = function (response) {
+    // Do something with response here
+    console.log(util.inspect(response, false, null, true))
+}
+
 let myPaymentCallback = function (response) {
     // Do something with response here
     console.log(util.inspect(response, false, null, true))
+    payload = new ibx.batchPayloadModel();
+    ibx.openBatchSummary(payload, myReportingCallback);
 }
 
 // If you want to post a card transaction
@@ -92,7 +99,6 @@ let myCallback = function (response) {
 ibx.setAuth(process.env.TEST_USERNAME, process.env.TEST_PASSWORD);
 ibx.setEnv(ibx.environments.SANDBOX);
 ibx.storeCard(payload, myCallback); // That's it!
-
 
 ```
 
