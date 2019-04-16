@@ -1,6 +1,6 @@
 {
   "name": "payroc_ibx",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "description": "This is an SDK for transaction processing with IBX gateway",
   "main": "ibx-core.js",
   "keywords": [
@@ -25,24 +25,38 @@
   },
   "author": "IBX Developemnet <support@ibxpays.com> (http://www.payroc.com)",
   "license": "MIT",
-  "runkitExample" : "var ibx = require('payroc_ibx');",
+  "runkitExample": "var ibx = require('payroc_ibx');",
   "bugs": {
     "url": "https://github.com/payroc/ibx-node/issues"
   },
   "scripts": {
     "test": "node node_modules/nyc/bin/nyc node_modules/mocha/bin/mocha 'test/**/*.js'",
     "test-report": "node node_modules/nyc/bin/nyc report",
-    "test-check-coverage": "node node_modules/nyc/bin/nyc check-coverage --lines 95 --functions 95 --branches 95"
+    "test-check-coverage": "node node_modules/nyc/bin/nyc check-coverage --lines 95 --functions 95 --branches 95",
+    "lint": "prettier-standard './**/*.{js}'"
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "eslint": "^5.16.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-standard": "^4.0.0",
     "istanbul": "^0.4.5",
-    "mocha": "^6.0.2",
-    "nyc": "^13.3.0"
+    "mocha": "^6.1.3",
+    "nyc": "^14.0.0"
   },
   "dependencies": {
     "request": "^2.88.0",
+    "soap": "^0.26.0",
     "util": "^0.11.1",
     "xml2js": "^0.4.19"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    }
   }
 }

@@ -16,10 +16,10 @@ If there is a platform you would like to see in addition to `npm` for dependency
 Run the following command at the root fo your project
 
 ```bash
-npm install ibx-node
+npm install payroc_ibx
 ```
 
-[IBX SDK on NPM](https://www.npmjs.com/package/ibx-node)
+[IBX SDK on NPM](https://www.npmjs.com/package/payroc_ibx)
 
 
 ### Manual Install
