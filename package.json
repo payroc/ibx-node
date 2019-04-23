@@ -1,6 +1,6 @@
 {
   "name": "payroc_ibx",
-  "version": "0.9.4",
+  "version": "0.9.5",
   "description": "This is an SDK for transaction processing with IBX gateway",
   "main": "ibx-core.js",
   "keywords": [
@@ -33,7 +33,7 @@
     "test": "node node_modules/nyc/bin/nyc node_modules/mocha/bin/mocha 'test/**/*.js'",
     "test-report": "node node_modules/nyc/bin/nyc report",
     "test-check-coverage": "node node_modules/nyc/bin/nyc check-coverage --lines 95 --functions 95 --branches 95",
-    "lint": "prettier-standard './**/*.{js}'"
+    "lint": "npx eslint examples/**.js; npx eslint models/**.js; npx eslint test/**.js"
   },
   "devDependencies": {
     "chai": "^4.2.0",

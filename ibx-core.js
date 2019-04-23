@@ -3,24 +3,17 @@
 // External requirements
 const request = require('request');
 const xml2js = require('xml2js').Parser({ explicitArray: false });
-// const parseString = require('xml2js').parseString;
 const util = require('util');
 
 // Endpoints
-let baseEndpoint = 'sandbox.ibxpays.com';
-
-const tokenPostEndpoint = '/ws/cardsafe.asmx/StoreCard';
-// const tokenGetEndpoint = '${tokenPostEndpoint}/'
-
-const transactionsPostEndpoint = '/ws/cardsafe.asmx/ProcessCreditCard';
-// const transactionsGetEndpoint = '${transactionsPostEndpoint}'
-
-const cardBatchSummaryPostEndpoint = '/vt/ws/trxdetail.asmx/GetOpenBatchSummary';
-// const cardBatchSummaryGetEndpoint = '${cardBatchSummaryPostEndpoint}'
+let BASE_ENDPOINT = 'sandbox.ibxpays.com';
+const TOKEN_POST_ENDPOINT = '/ws/cardsafe.asmx/StoreCard';
+const TRANSACTIONS_POST_ENDPOINT = '/ws/cardsafe.asmx/ProcessCreditCard';
+const CARD_BATCH_POST_SUMMARY_ENDPOINT = '/vt/ws/trxdetail.asmx/GetOpenBatchSummary';
 
 // Params
-let apiUsername;
-let apiPassword;
+let _API_USERNAME;
+let _API_PASSWORD;
 let errorObj = { error: { code: 100, message: '', obj: null } };
 
 // Public models for convenience
@@ -80,16 +73,16 @@ function parseExtData (inputStr) {
 exports.environments = { UAT: 'uat', SANDBOX: 'sandbox', PRODUCTION: 'production' };
 
 exports.setEnv = function (env) {
-  baseEndpoint = env + '.ibxpays.com';
+  BASE_ENDPOINT = env + '.ibxpays.com';
 };
 
 exports.setAuth = function (username, password) {
-  apiUsername = username;
-  apiPassword = password;
+  _API_USERNAME = username;
+  _API_PASSWORD = password;
 };
 
 exports.storeCard = function (payload, callback) {
-  if (!apiUsername || !apiPassword) {
+  if (!_API_USERNAME || !_API_PASSWORD) {
     errorObj.error.message = 'Invalid Credentials';
     callback(errorObj);
     return;
@@ -97,13 +90,13 @@ exports.storeCard = function (payload, callback) {
 
   request({
     method: 'POST',
-    uri: 'https://' + baseEndpoint + tokenPostEndpoint,
+    uri: `https://${BASE_ENDPOINT}${TOKEN_POST_ENDPOINT}`,
     headers: {
       'User-Agent': `Node.js ${process.version}`
     },
     form: {
-      UserName: apiUsername,
-      Password: apiPassword,
+      UserName: _API_USERNAME,
+      Password: _API_PASSWORD,
       TokenMode: 'jstoken',
       CardNum: payload.card.number,
       ExpDate: payload.card.exp_month + payload.card.exp_year,
@@ -130,7 +123,7 @@ exports.storeCard = function (payload, callback) {
 };
 
 exports.processCard = function (payload, callback) {
-  if (!apiUsername || !apiPassword) {
+  if (!_API_USERNAME || !_API_PASSWORD) {
     errorObj.error.message = 'Invalid Credentials';
     callback(errorObj);
     return;
@@ -138,13 +131,13 @@ exports.processCard = function (payload, callback) {
 
   request({
     method: 'POST',
-    uri: 'https://' + baseEndpoint + transactionsPostEndpoint,
+    uri: 'https://' + BASE_ENDPOINT + TRANSACTIONS_POST_ENDPOINT,
     headers: {
       'User-Agent': `Node.js ${process.version}`
     },
     form: {
-      UserName: apiUsername,
-      Password: apiPassword,
+      UserName: _API_USERNAME,
+      Password: _API_PASSWORD,
       TransType: payload.transaction_type,
       CardToken: payload.token,
       TokenMode: 'jstoken',
@@ -169,7 +162,7 @@ exports.processCard = function (payload, callback) {
 };
 
 exports.openBatchSummary = function (payload, callback) {
-  if (!apiUsername || !apiPassword) {
+  if (!_API_USERNAME || !_API_PASSWORD) {
     errorObj.error.message = 'Invalid Credentials';
     callback(errorObj);
     return;
@@ -184,13 +177,13 @@ exports.openBatchSummary = function (payload, callback) {
 
   request({
     method: 'POST',
-    uri: 'https://' + baseEndpoint + cardBatchSummaryPostEndpoint,
+    uri: `https://${BASE_ENDPOINT}${CARD_BATCH_POST_SUMMARY_ENDPOINT}`,
     headers: {
       'User-Agent': `Node.js ${process.version}`
     },
     form: {
-      username: apiUsername,
-      password: apiPassword,
+      username: _API_USERNAME,
+      password: _API_PASSWORD,
       rpNum: payload.gatewayId,
       beginDt: fromDate,
       endDt: toDate,

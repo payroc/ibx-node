@@ -2,10 +2,9 @@
 
 const ibx = require('payroc_ibx');
 const util = require('util');
-const xml2js = require('xml2js').Parser({ explicitArray: false });
 
 // You can use your own JSON Model, or use the included models.
-const cardData = new ibx.CardDataModel();
+let cardData = new ibx.CardDataModel();
 cardData.name = 'Barney Rubble';
 cardData.number = '4242424242424242';
 cardData.cvv = '999';
@@ -13,10 +12,10 @@ cardData.exp_month = '12';
 cardData.exp_year = '20';
 
 // Address is optional, unless using loopback /sandbox / demo account.
-const addressData = new ibx.AddressDataModel();
+let addressData = new ibx.AddressDataModel();
 addressData.postal_code = '84025';
 
-const metaData = new ibx.MetaDataModel();
+let metaData = new ibx.MetaDataModel();
 metaData.email = 'example@ibxpays.com';
 
 let payload = new ibx.StoreCardPayloadModel();

@@ -7,13 +7,12 @@
 *
 * */
 
-let soap = require('soap');
-let parseString = require('xml2js').parseString;
+const Soap = require('soap');
+const ParseString = require('xml2js').parseString;
 
-let url = 'https://sandbox.ibxpays.com/vt/ws/trxdetail.asmx';
-let wsdlurl = url + '?wsdl';
-
-let soapClientOptions = {};
+const URL = 'https://sandbox.ibxpays.com/vt/ws/trxdetail.asmx';
+const WSDL_URL = URL + '?wsdl';
+const SOAP_CLIENT_OPTIONS = {};
 
 let CardTrxSummaryParameters = {
   'UserName': 'test_username',
@@ -40,17 +39,20 @@ let CardTrxSummaryParameters = {
 };
 
 // Give the createClient Method the WSDL as the first argument
-soap.createClient(wsdlurl, soapClientOptions, function (err, client) {
+Soap.createClient(WSDL_URL, SOAP_CLIENT_OPTIONS, function (err, client) {
   // We use SSL accelerator so make sure the right url is set manually if you find you're hitting non-secure site which isn't listening
-  client.setEndpoint(url);
+  if (err) console.log(err);
+  client.setEndpoint(URL);
 
   // The Client now has all the methods of the WSDL. Use it to get cardtrxsummary feeding it the JSON Payload
   client.GetCardTrxSummary(CardTrxSummaryParameters, function (err, result, body) {
+    if (err) console.log(err);
     console.log('Result:');
     console.log(result);
     console.log('\n');
 
-    parseString(result.GetCardTrxSummaryResult, function (err, result) {
+    ParseString(result.GetCardTrxSummaryResult, function (err, result) {
+      if (err) console.log(err);
       console.log('ParsedResult:');
       console.log(result);
       console.log('\n');
