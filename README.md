@@ -1,4 +1,7 @@
 # IBX SDK for NodeJS
+[![CircleCI](https://circleci.com/gh/payroc/ibx-node.svg?style=svg)](https://circleci.com/gh/payroc/ibx-node)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
+[![Try Payroc IBX SDK on RunKit](https://badge.runkitcdn.com/payroc_ibx.svg)](https://npm.runkit.com/payroc_ibx)
 
 As a quick helper for our NodeJS community to get up and running even faster in your favorite dependency manager, we have created this API / SDK wrapper specifically tailored for NodeJS and Express. 
 
@@ -141,7 +144,6 @@ Example successful `processCard` using the example above will return the followi
 Check out the files in `/examples` for other ideas for implementation.
 
 ## Testing
-[![Try Payroc IBX SDK on RunKit](https://badge.runkitcdn.com/payroc_ibx.svg)](https://npm.runkit.com/payroc_ibx)
 
 Unit tests on this project are run using Mocha. You can find each test in the `/test` folder.
 
