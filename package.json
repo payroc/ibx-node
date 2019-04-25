@@ -32,13 +32,14 @@
   "scripts": {
     "test": "node node_modules/nyc/bin/nyc node_modules/mocha/bin/mocha --timeout 15000 'test/**/*.js'",
     "test-report": "node node_modules/nyc/bin/nyc report",
-    "test-check-coverage": "node node_modules/nyc/bin/nyc check-coverage --lines 95 --functions 95 --branches 95"
+    "test-check-coverage": "node node_modules/nyc/bin/nyc check-coverage --lines 95 --functions 95 --branches 95",
+    "lint": "npx eslint examples/**.js; npx eslint models/**.js; npx eslint test/**.js"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "istanbul": "^0.4.5",
     "mocha": "^6.0.2",
-    "nyc": "^13.3.0"
+    "nyc": "^14.0.0"
   },
   "dependencies": {
     "request": "^2.88.0",
