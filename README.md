@@ -1,4 +1,5 @@
 # IBX SDK for NodeJS
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
 
 As a quick helper for our NodeJS community to get up and running even faster in your favorite dependency manager, we have created this API / SDK wrapper specifically tailored for NodeJS and Express. 
 
@@ -16,7 +17,7 @@ If there is a platform you would like to see in addition to `npm` for dependency
 Run the following command at the root fo your project
 
 ```bash
-npm install ibx-node
+npm install payroc_ibx
 ```
 
 [IBX SDK on NPM](https://www.npmjs.com/package/payroc_ibx)
@@ -43,7 +44,7 @@ const util = require('util');
 const xml2js = require('xml2js').Parser({explicitArray:false});
 
 // You can use your own JSON Model, or use the included models.
-const cardData = new ibx.cardDataModel();
+const cardData = new ibx.CardDataModel();
 cardData.name = 'Barney Rubble';
 cardData.number = '4242424242424242';
 cardData.cvv = '999';
@@ -51,13 +52,13 @@ cardData.exp_month = '12';
 cardData.exp_year = '20';
 
 // Address is optional, unless using loopback /sandbox / demo account.
-const addressData = new ibx.addressDataModel();
+const addressData = new ibx.AddressDataModel();
 addressData.postal_code = '84025';
 
-const metaData = new ibx.metaDataModel();
+const metaData = new ibx.MetaDataModel();
 metaData.email = "example@ibxpays.com";
 
-let payload = new ibx.storeCardPayloadModel();
+let payload = new ibx.StoreCardPayloadModel();
 payload.amount = '1000';
 payload.card = cardData;
 payload.address = addressData;
@@ -71,7 +72,7 @@ let myReportingCallback = function (response) {
 let myPaymentCallback = function (response) {
     // Do something with response here
     console.log(util.inspect(response, false, null, true))
-    payload = new ibx.batchPayloadModel();
+    payload = new ibx.BatchPayloadModel();
     ibx.openBatchSummary(payload, myReportingCallback);
 }
 
@@ -86,7 +87,7 @@ let myCallback = function (response) {
     // Do something with response here
     console.log(util.inspect(response, false, null, true))
 
-    payload = new ibx.processCardPayloadModel();
+    payload = new ibx.ProcessCardPayloadModel();
 
     payload.token = response.ExtData.CardSafeToken;
     payload.amount = (Math.random() * 100).toFixed(2).toString();
